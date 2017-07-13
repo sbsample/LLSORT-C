@@ -4,4 +4,7 @@
 # include <string.h>
 # include "List.h"
 
-Node 
+int main()
+{
+	return 0;
+}

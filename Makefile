@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Wpedantic -Werror -std=c99
+CFLAGS = -g -Wall -std=c99
 OBJECTS = Lex.o List.o
 
 .PHONY: all

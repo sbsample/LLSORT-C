@@ -4,21 +4,41 @@
 # include <string.h>
 # include "List.h"
 
+
+typedef struct NodeObj
+{
+	int value;
+	struct nodeObj* next;
+	struct nodeObj* previous;
+
+}NodeObj;
+
+typedef NodeObj* Node;
+
+typedef struct ListObj
+{
+	Node front;
+	Node back;
+	Node index;
+	int cursor;
+	int length;
+}ListObj;
+
 List newList()
 {
-	List *list = (List*) malloc(sizeof(list));
-	node -> front = NULL;
-	node -> back = NULL;
-	node -> cursor = -1;
-	node -> index = NULL;
-	node -> length = 0;
+	List L = malloc(sizeof(ListObj));
+	L -> front = NULL;
+	L -> back = NULL;
+	L -> cursor = -1;
+	L -> index = NULL;
+	L -> length = 0;
 
-	return list;
+	return(L);
 }
 
-Node *newNode(int data)
+Node newNode(int data)
 {
-	Node *node = (Node*)malloc(sizeof(node));
+	Node node = malloc(sizeof(NodeObj));
 	node -> value = data;
 	node -> next = NULL;
 	node -> previous = NULL;
@@ -28,8 +48,16 @@ Node *newNode(int data)
 
 int length(List L)
 {
-	return L -> lengthl
-}
+	if (L -> length)
+	{
+		printf("List Error: calling length() on NULL List reference\n");
+      	exit(1);
+	}
+	else
+	{
+		return L -> length;
+	}
+}	
 
 int index(List L)
 {
@@ -54,11 +82,11 @@ int get(List L)
 }
 
 int equals(List A, List B)
-{
-	Node aFinder = A -> front;
-	Node bFinder = B -> front;
+{	
+	Node aFind = A -> front;
+	Node bFind = B -> front;
 
-	if (A -> length == NULL ||   B -> length == NULL)
+	if (A -> length == 0 ||   B -> length == 0)
 	{
 		return 0;
 	}
@@ -70,14 +98,14 @@ int equals(List A, List B)
 	{
 		for (int i = 0; i < A -> length; i++)
 		{
-			if (aFinder -> value != bFinder -> value)
+			if (aFind -> value != bFind -> value)
 			{
 				return 0;
 			}
 			else
 			{
-				aFinder = aFinder -> next;
-				bFinder = bFinder -> next; 
+				aFind = (Node) aFind -> next;
+				bFind = (Node) bFind -> next; 
 			}
 		}
 	}
@@ -98,20 +126,91 @@ void clear(List L)
 	{
 		if (L -> length > 0)
 		{	
-			Node *temp = L -> front;
+			Node temp = L -> front;
 			L -> front =  L -> front -> next;
-			L-> front -> previous = NULL;
+			L -> front -> previous = NULL;
 			temp -> next = NULL;
 			free(temp);
 
 
 		}
 		
-		cursor = - 1
-		length = 0;	
+		L -> cursor = -1;
+		L -> length = 0;	
 
 	}
 }
+
+void moveFront(List L)
+{
+	if (length > 0)
+	{
+		L -> cursor = 0;
+		L -> index = L -> front;
+
+	}
+}
+
+void moveBack(List L)
+{
+	if (L -> length >0)
+	{
+		L -> cursor = L -> length -1;
+		L -> index =  L -> back;
+	}
+}
+
+void movePrev(List L)
+{
+	if (L -> cursor > 0)
+	{
+		L -> cursor -= 1;
+		L -> index = L -> index -> previous;
+	}
+	else if ( L -> cursor == 0)
+	{
+		L -> cursor = -1;
+		L -> index = NULL;
+	}	
+}
+
+void moveNext(List L)
+{
+	if (L -> cursor >= 0 && L -> cursor != L -> length - 1)
+	{
+		L -> cursor = -1;
+		L -> index = L -> index -> next;
+	}
+	else if (L -> cursor == L -> length - 1)
+	{
+		L -> cursor = -1;
+		L -> index = NULL;
+	}
+}
+
+void prepend(List L, int data)
+{
+	Node n = newNode(data);
+	if (L -> front == NULL && L -> back == NULL)
+	{
+		L -> front = n;
+		L -> back = n;
+	}
+	else
+	{
+		n -> next = L -> front;
+		L -> front -> previous = n;
+		L -> front = n;
+		if (L -> cursor >= 0)
+		{
+			L -> cursor += 1;
+		}	
+	}
+	L -> length += 1;
+
+}
+
+
 
 
 

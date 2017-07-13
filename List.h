@@ -1,24 +1,17 @@
+# ifndef LIST_H
+# define LIST_H
 # include <stdbool.h>
 # include <stdio.h>
 
 // Constructors-Destructors ---------------------------------------------------
+
+typedef struct ListObj* List;
+
+
 List newList(void);
 void freeList(List* pL);
 
-typedef struct Node Node;
-typedef struct List List;
 
-struct Node
-{
-	int *value;
-	Node *previous, *next;
-}
-
-struct List
-{
-	Node *front, *back, *index;
-	int cursor, length;
-}
 // Access functions -----------------------------------------------------------
 int length(List L);
 int index(List L);
@@ -42,3 +35,5 @@ void delete(List L);
 // Other operations -----------------------------------------------------------
 void printList(FILE* out, List L);
 List copyList(List L);
+
+# endif
