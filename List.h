@@ -14,7 +14,7 @@ void freeList(List* pL);
 
 // Access functions -----------------------------------------------------------
 int length(List L);
-int index(List L);
+int ind(List L);
 int front(List L);
 int back(List L);
 int get(List L);
