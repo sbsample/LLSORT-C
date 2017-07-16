@@ -4,7 +4,7 @@
 # Makefile
 
 CC = gcc
-CFLAGS = -g -Wall -std=c99
+CFLAGS = -g -Wall -Werror -std=c99
 OBJECTS = Lex.o List.o
 
 .PHONY: all
@@ -22,7 +22,7 @@ List.o : List.c
 
 
 .PHONY: clean
-clean: 
+clean:
 	rm $(OBJECTS) Lex
 
 

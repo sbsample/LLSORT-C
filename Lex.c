@@ -8,7 +8,7 @@
 # include <string.h>
 # include "List.h"
 //inSort()
-//sorts list by array 
+//sorts list by array
 List inSort(char* arr[], int ind)
 {
 	List l = newList();
@@ -16,9 +16,10 @@ List inSort(char* arr[], int ind)
 
 	for ( int i = 1; i <= ind; i++)
 	{
-		
+
 		moveFront(l);
-		while ( (index(l)) >= 0 && strcmp(arr[i], itoa(get(l))) >= 0 ) 
+
+		while ( (index(l)) >= 0 && strcmp(arr[i], arr[get(l)]) >= 0 )
 		{
 			moveNext(l);
 		}
@@ -37,7 +38,7 @@ List inSort(char* arr[], int ind)
 int main(int argc, char* argv[])
 {
 	// checks for proper number of args
-	if (argc < 3) 
+	if (argc < 3)
 	{
 		printf("error %s requires two files \n", argv[0]);
 		exit(1);
@@ -62,7 +63,7 @@ int main(int argc, char* argv[])
 	fclose(in);
 	//reopen the file
 	in = fopen(argv[1], "r");
-	char* item;
+	char *item;
 	char *wordArr = (char *)malloc(lineCount * sizeof(char*));
 	int i = 0;
 	// copy individual words to new file
@@ -83,7 +84,7 @@ int main(int argc, char* argv[])
 	int listCount = index(sortList);
 	for (moveFront(sortList); listCount; moveNext(sortList))
 	{
-		
+
 		fprintf(out, "%d", wordArr[get(sortList)]);
 
 	}
