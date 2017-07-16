@@ -1,4 +1,3 @@
-
 //Staunton Sample
 //sbsample
 //pa2
@@ -10,17 +9,16 @@
 # include "List.h"
 //inSort()
 //sorts list by array 
-List inSort(char* arr[], int index)
+List inSort(char* arr[], int ind)
 {
 	List l = newList();
 	append(l, 0);
-	char temp;
 
-	for ( int i = 1; i <= index; i++)
+	for ( int i = 1; i <= ind; i++)
 	{
-		temp = *(arr + i);
+		
 		moveFront(l);
-		while ((index(l)) >= 0 && strcmp(arr[i], get(l)) >= 0)
+		while ( (index(l)) >= 0 && strcmp(arr[i], itoa(get(l))) >= 0 ) 
 		{
 			moveNext(l);
 		}
@@ -48,9 +46,9 @@ int main(int argc, char* argv[])
 	FILE *in;
 	FILE *out;
 	// Read in with fopen
-	*in  = (argv[1], "r");
+	in  = fopen(argv[1], "r");
 	// Read out with fopen
-	*out = (argv[2], "w");
+	out = fopen(argv[2], "w");
 
 	char buffer[256];
 	int lineCount = 0;
@@ -65,13 +63,13 @@ int main(int argc, char* argv[])
 	//reopen the file
 	in = fopen(argv[1], "r");
 	char* item;
-	char *wordArr = (char **)malloc(lines * sizeof(char*));
+	char *wordArr = (char *)malloc(lineCount * sizeof(char*));
 	int i = 0;
 	// copy individual words to new file
 
 	while( fgets(buffer, fileSize, in) != NULL)
 	{
-		item = malloc((strlen(lineCount)+1) * sizeof(char));
+		item = malloc((sizeof(lineCount)) * sizeof(char));
 		strcopy(item, buffer);
 		wordArr[i] = item;
 		i++;
@@ -80,13 +78,13 @@ int main(int argc, char* argv[])
 	// create new list
 	List sortList = newList();
 	//sort the list
-	sortList = inSort(*wordArr, lineCount);
+	sortList = inSort(&wordArr, lineCount);
 	//print the list
 	int listCount = index(sortList);
 	for (moveFront(sortList); listCount; moveNext(sortList))
 	{
 		
-		fprintf(out, "%d", wordArr[get(&listCount)]);
+		fprintf(out, "%d", wordArr[get(sortList)]);
 
 	}
 
