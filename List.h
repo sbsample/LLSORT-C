@@ -1,3 +1,9 @@
+
+//Staunton Sample
+//sbsample
+//pa2
+//List.h
+
 # ifndef LIST_H
 # define LIST_H
 # include <stdbool.h>
@@ -14,7 +20,7 @@ void freeList(List* pL);
 
 // Access functions -----------------------------------------------------------
 int length(List L);
-int ind(List L);
+int index(List L);
 int front(List L);
 int back(List L);
 int get(List L);

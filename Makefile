@@ -1,3 +1,8 @@
+# Staunton Sample
+# sbsample
+# pa2
+# Makefile
+
 CC = gcc
 CFLAGS = -g -Wall -std=c99
 OBJECTS = Lex.o List.o

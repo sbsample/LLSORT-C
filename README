@@ -1,0 +1,17 @@
+This exercise reads in a file, sorts the lines by the first character, and outputs a sorted string of the indices of the array of lines.
+
+Use make to compile the program.
+Use make clean to clean up binary and class files.
+
+The program contains the following files.
+
+List.c - this file creates a Double Linked List ADT with numerous commands
+
+Lex.c - this inputs, outputs, and sorts the line data.
+
+Makefile - compiles and cleans the program.
+
+ListClient.c - test code.
+
+README- the file you are reading now.
+

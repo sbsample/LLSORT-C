@@ -1,3 +1,9 @@
+
+//Staunton Sample
+//sbsample
+//pa2
+//List.c
+
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -6,7 +12,7 @@
 
 
 
-
+// Constructors
 typedef struct NodeObj
 {
 	int value;
@@ -37,7 +43,23 @@ List newList()
 
 	return(L);
 }
-
+//freeList()
+// frees memory in list by eliminating all nodes
+void freeList(List* pl)
+{
+	if (pl != NULL && *pl != NULL)
+	{
+		int listLength = length(*pl);
+		while (listLength > 0)
+		{
+			deleteFront(*pl);
+		}
+		free(*pl);
+		*pl =NULL;
+	}
+}
+//newNode()
+//  creates new node
 Node newNode(int data)
 {
 	Node node = malloc(sizeof(NodeObj));
@@ -47,42 +69,40 @@ Node newNode(int data)
 
 	return node;
 }
-
+// length()
+// returns length of list
 int length(List L)
 {
-	if (L -> length)
-	{
-		printf("List Error: calling length() on NULL List reference\n");
-      	exit(1);
-	}
-	else
-	{
-		return L -> length;
-	}
+	return L -> length;
 }	
-
-int ind(List L)
+// index()
+// returns index of list
+int index(List L)
 {
 	return L -> cursor;
 }
-
+//front()
+// returns node front of list
 int front(List L)
 {
 	
 	return L -> front -> value;
 	
 }
-
+// back()
+//returns node at back of list
 int back(List L)
 {
 	return L -> back -> value;
 }
-
+//get()
+//returns node at cursor
 int get(List L)
 {
 	return L -> index -> value; 
 }
-
+// equals()
+//does List A equal List B
 int equals(List A, List B)
 {	
 	Node aFind = A -> front;
@@ -113,7 +133,8 @@ int equals(List A, List B)
 	}
 	return 1;
 }
-
+// clear()
+// clears out list
 void clear(List L)
 {
 	if(L -> index != NULL)
@@ -142,7 +163,8 @@ void clear(List L)
 
 	}
 }
-
+//moveFront()
+// moves the cursor to the back of the list
 void moveFront(List L)
 {
 	if (length > 0)
@@ -152,7 +174,8 @@ void moveFront(List L)
 
 	}
 }
-
+// moveBack()
+//moves cursor to back of the list
 void moveBack(List L)
 {
 	if (L -> length >0)
@@ -161,7 +184,8 @@ void moveBack(List L)
 		L -> index =  L -> back;
 	}
 }
-
+// movePrev()
+// moves cursor back one
 void movePrev(List L)
 {
 	if (L -> cursor > 0)
@@ -175,7 +199,8 @@ void movePrev(List L)
 		L -> index = NULL;
 	}	
 }
-
+//moveNext()
+// moves cursor next
 void moveNext(List L)
 {
 	if (L -> cursor >= 0 && L -> cursor != L -> length - 1)
@@ -189,7 +214,8 @@ void moveNext(List L)
 		L -> index = NULL;
 	}
 }
-
+// prepend()
+// adds element to the front of list
 void prepend(List L, int data)
 {
 	Node n = newNode(data);
@@ -211,7 +237,8 @@ void prepend(List L, int data)
 	L -> length += 1;
 
 }
-
+// append()
+// adds node to back of list
 void append(List L, int data)
 {
 	Node n = newNode(data);
@@ -229,7 +256,8 @@ void append(List L, int data)
 
 	L -> length += 1;
 }
-
+//insertBefore()
+// inserts before cursor
 void insertBefore(List L, int data)
 {
 	Node n = newNode(data);
@@ -252,7 +280,8 @@ void insertBefore(List L, int data)
 	}
 }
 
-
+//insertAfter()
+//inserts node after cursor
 void insertAfter(List L, int data)
 {
 	Node n = newNode(data);
@@ -275,7 +304,8 @@ void insertAfter(List L, int data)
 	
 }
 
-
+//deleteFront()
+// deletes node at front of list
 void deleteFront(List L)
 {
 	
@@ -324,7 +354,8 @@ void deleteFront(List L)
 		
 	}
 }
-
+//deleteBack()
+//deletes back of the list
 void deleteBack(List L)
 {	
 	if (L -> length > 1 && L -> cursor < L -> length - 1)
@@ -357,7 +388,8 @@ void deleteBack(List L)
 		
 	}
 }
-
+//delete()
+//deletes at cursor
 void delete(List L)
 {
 	Node temp;
@@ -399,8 +431,9 @@ void delete(List L)
     L -> length -= 1;
 	temp = NULL;
 }
-
-List copy(List L)
+// copyList()
+// copies the list into new list
+List copyList(List L)
 {
 	List newL = newList();
 	Node tempNode = L -> front;
@@ -412,6 +445,15 @@ List copy(List L)
 
 	return newL;
 }
-
-void printList(FILE* out, List L);
+//printList
+// prints list
+void printList(FILE* out, List L)
+{
+	Node n = L -> front;
+	for (int i = 0; i < L -> length - 1; i++)
+	{
+		 fprintf(out,"%d ", n -> value);
+	}
+	
+}
 
